@@ -9,7 +9,7 @@ export default function Login() {
 
             <LoginForm/>
 
-            <p className='mt-4 text-sm'>Don't have an account? <Link href='/register' className='underline decoration-solid'>Create one!</Link></p>
+            <p className='mt-4 text-sm'>Don&#39;t have an account? <Link href='/register' className='underline decoration-solid'>Create one!</Link></p>
         </div>
     )
 }

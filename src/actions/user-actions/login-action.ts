@@ -1,6 +1,7 @@
 'use server'
 
 import {z} from "zod"
+import {redirect} from "next/navigation";
 
 const credential = z.object({
     email: z.string(),
@@ -13,7 +14,7 @@ export async function login(prevState: any, formData: FormData) {
         password: formData.get('password')
     })
 
-    return await fetch('https://tasker.my.id/api/v1/user/login', {
+    const res = await fetch('https://tasker.my.id/api/v1/user/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -21,9 +22,7 @@ export async function login(prevState: any, formData: FormData) {
         body: JSON.stringify(parsed)
     }).then(async data => {
         if (data.status === 200) {
-            return {
-                message: 'Login success!'
-            }
+            return 200
         } else {
             const json = await data.json()
 
@@ -36,4 +35,8 @@ export async function login(prevState: any, formData: FormData) {
             message: error.message
         }
     })
+
+    if (res === 200) redirect('/console')
+
+    return res
 }
