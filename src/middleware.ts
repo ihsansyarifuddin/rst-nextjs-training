@@ -1,7 +1,7 @@
 import type {NextRequest} from "next/server";
 import {NextResponse} from "next/server";
 
-function isTokenExpired(token: string | undefined) {
+export function isTokenExpired(token: string | undefined) {
     if (token === undefined) return true
 
     const expiry = (JSON.parse(atob(token.split('.')[1]))).exp;
