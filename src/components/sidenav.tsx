@@ -5,41 +5,35 @@ import {faChartLine, faClipboardList, faPlus, faTasks} from "@fortawesome/free-s
 import Link from "next/link";
 import {getAll} from "@/actions/project-actions/get-projects";
 import {useEffect, useState} from "react";
+import {getAuthUser} from "@/middleware";
+import {getCookie} from "cookies-next"
+import {ProfileButton} from "@/components/profile-btn";
 
 type Props = {
     isExpanded: boolean
 }
 
-function fetchData() {
-    return getAll().then(data => {
-        if (data.message === 'Success') {
-            return data.data
-        } else {
-            return []
-        }
-    })
-}
-
 export function Sidenav(prop: Props) {
-    const [data, setData] = useState([])
+    const [data, setData] = useState([] as Project[])
+    const [user, setUser] = useState({} as User)
+
     useEffect(() => {
         getAll().then(result => {
             if (result.message === 'Success') {
-                setData(result.data)
+                setData(result.data as Project[])
             } else {
                 setData([])
             }
         }).catch(err => {
             setData([])
         })
+        setUser(getAuthUser(getCookie('auth._token.local')!))
     }, [])
-
-    console.log(data)
 
     const width = prop.isExpanded ? 'w-[14rem]' : 'w-[80px]'
 
     return (
-        <div onLoadedData={getAll} className={ 'sidenav h-screen bg-gradient-to-tl from-purple-950 to-fuchsia-950 ' + width }>
+        <div className={ 'sidenav h-screen bg-gradient-to-tl from-purple-950 to-fuchsia-950 flex flex-col ' + width }>
             <div className='text-center border-gray-400 border-b py-3 mx-5'>
                 <p className='font-bold text-2xl'>{ prop.isExpanded ? 'Tasker' : 'T' }</p>
             </div>
@@ -80,6 +74,10 @@ export function Sidenav(prop: Props) {
             </div>
             <div className='mt-3 ps-5 py-2 bg-blue-800 hover:bg-blue-950 hover:cursor-pointer'>
                 <FontAwesomeIcon icon={faPlus} className='w-[20px] me-2'/> New Task
+            </div>
+
+            <div className='flex flex-grow justify-center'>
+                <ProfileButton username={user.username} user_id={user.user_id} email={user.email}/>
             </div>
         </div>
     )

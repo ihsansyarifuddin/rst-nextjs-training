@@ -4,13 +4,21 @@
 import { experimental_useFormState as useFormState } from "react-dom"
 import {login} from "@/actions/user-actions/login-action";
 import {SubmitButton} from "@/components/submit-btn";
+import { setCookie } from "cookies-next"
+import {redirect} from "next/navigation";
 
 const initialState = {
     message: null,
+    token: null
 }
 
 export function LoginForm() {
     const [state, action] = useFormState(login, initialState)
+
+    if (state?.token !== null) {
+        setCookie('auth._token.local', state.token)
+        redirect('/console')
+    }
 
     return (
         <form action={ action }>

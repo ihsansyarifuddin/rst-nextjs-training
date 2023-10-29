@@ -1,7 +1,6 @@
 'use server'
 
 import {z} from "zod"
-import {redirect} from "next/navigation";
 
 const credential = z.object({
     email: z.string(),
@@ -21,22 +20,25 @@ export async function login(prevState: any, formData: FormData) {
         },
         body: JSON.stringify(parsed)
     }).then(async data => {
+        const json = await data.json()
         if (data.status === 200) {
-            return 200
-        } else {
-            const json = await data.json()
-
+            const token = json['data']['token']
             return {
-                message: json['message']
+                message: 'success',
+                token: token
+            }
+        } else {
+            return {
+                message: json['message'],
+                token: null
             }
         }
     }).catch(error => {
         return {
-            message: error.message
+            message: error.message,
+            token: null
         }
     })
-
-    if (res === 200) redirect('/console')
 
     return res
 }
