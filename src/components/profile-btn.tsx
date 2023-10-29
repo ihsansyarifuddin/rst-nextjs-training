@@ -7,7 +7,7 @@ import {redirect, RedirectType} from "next/navigation";
 import {useState} from "react";
 
 function logout() {
-    deleteCookie('auth._token.local')
+    deleteCookie('_token')
     window.location.replace('/login')
 }
 

@@ -8,6 +8,7 @@ import {useEffect, useState} from "react";
 import {getAuthUser} from "@/middleware";
 import {getCookie} from "cookies-next"
 import {ProfileButton} from "@/components/profile-btn";
+import {NewProjectSlider} from "@/components/sliders/new-project-slider";
 
 type Props = {
     isExpanded: boolean
@@ -16,6 +17,7 @@ type Props = {
 export function Sidenav(prop: Props) {
     const [data, setData] = useState([] as Project[])
     const [user, setUser] = useState({} as User)
+    const [isNewProjectOpen, setIsNewProjectOpen] = useState(false)
 
     useEffect(() => {
         getAll().then(result => {
@@ -27,7 +29,7 @@ export function Sidenav(prop: Props) {
         }).catch(err => {
             setData([])
         })
-        setUser(getAuthUser(getCookie('auth._token.local')!))
+        setUser(getAuthUser(getCookie('_token')!))
     }, [])
 
     const width = prop.isExpanded ? 'w-[14rem]' : 'w-[80px]'
@@ -39,46 +41,50 @@ export function Sidenav(prop: Props) {
             </div>
 
             <ul className='mt-5 border-gray-400 border-b pb-5'>
-                <li className='leading-9 ps-5 hover:bg-blue-950 hover:cursor-pointer'>
-                    <Link href='/console'>
+                <Link href='/console'>
+                    <li className='leading-9 ps-5 hover:bg-blue-950 hover:cursor-pointer'>
                         <FontAwesomeIcon icon={faChartLine} className='w-[20px]'/> Dashboard
-                    </Link>
-                </li>
-                <li className='leading-9 ps-5 hover:bg-blue-950 hover:cursor-pointer'>
-                    <Link href='/project'>
+                    </li>
+                </Link>
+
+                <Link href='/console/project'>
+                    <li className='leading-9 ps-5 hover:bg-blue-950 hover:cursor-pointer'>
                         <FontAwesomeIcon icon={faClipboardList} className='w-[20px]'/> Projects
-                    </Link>
-                </li>
-                <li className='leading-9 ps-5 hover:bg-blue-950 hover:cursor-pointer'>
-                    <Link href='/task'>
+                    </li>
+                </Link>
+
+                <Link href='/console/task'>
+                    <li className='leading-9 ps-5 hover:bg-blue-950 hover:cursor-pointer'>
                         <FontAwesomeIcon icon={faTasks} className='w-[20px]'/> Tasks
-                    </Link>
-                </li>
+                    </li>
+                </Link>
             </ul>
 
-            <p className='font-semibold ps-5 mt-1'>Your Projects</p>
-            <ul className='mt-3 border-gray-400 border-b pb-5'>
-                {data.map((dt, idx) => {
-                    return (
-                        <li key={dt.id} className='leading-6 ps-5 py-1.5 hover:bg-indigo-950 hover:cursor-pointer'>
-                            <Link href={'/project/' + dt.id}>
-                                {dt.name} <span className='ms-2 bg-blue-700 text-sm px-1 py-0.5 rounded-[4px]'>{dt.task.length}</span>
-                            </Link>
-                        </li>
-                    )
-                })}
-            </ul>
+            {/*<p className='font-semibold ps-5 mt-1'>Your Projects</p>*/}
+            {/*<ul className='mt-3 border-gray-400 border-b pb-5'>*/}
+            {/*    {data.map((dt, idx) => {*/}
+            {/*        return (*/}
+            {/*            <Link key={dt.id} href={'/console/project/' + dt.id}>*/}
+            {/*                <li  className='leading-6 ps-5 py-1.5 hover:bg-indigo-950 hover:cursor-pointer'>*/}
+            {/*                    {dt.name} <span className='ms-2 bg-blue-700 text-sm px-1 py-0.5 rounded-[4px]'>{dt.task.length}</span>*/}
+            {/*                </li>*/}
+            {/*            </Link>*/}
+            {/*        )*/}
+            {/*    })}*/}
+            {/*</ul>*/}
 
-            <div className='mt-3 ps-5 py-2 bg-indigo-800 hover:bg-indigo-950 hover:cursor-pointer'>
+            <button type='button' className='mt-3 ps-5 py-2 text-start bg-indigo-800 hover:bg-indigo-950 hover:cursor-pointer' onClick={() => setIsNewProjectOpen(!isNewProjectOpen)}>
                 <FontAwesomeIcon icon={faPlus} className='w-[20px] me-2'/> New Project
-            </div>
-            <div className='mt-3 ps-5 py-2 bg-blue-800 hover:bg-blue-950 hover:cursor-pointer'>
+            </button>
+            <button type='button' className='mt-3 ps-5 py-2 text-start bg-blue-800 hover:bg-blue-950 hover:cursor-pointer'>
                 <FontAwesomeIcon icon={faPlus} className='w-[20px] me-2'/> New Task
-            </div>
+            </button>
 
             <div className='flex flex-grow justify-center'>
                 <ProfileButton username={user.username} user_id={user.user_id} email={user.email}/>
             </div>
+
+            <NewProjectSlider isOpen={isNewProjectOpen} callback={setIsNewProjectOpen}/>
         </div>
     )
 }

@@ -17,3 +17,18 @@ body {
     )
     var(--background-start-rgb);
 }
+
+.slider {
+    position: absolute;
+    top: 0;
+    width: 300px;
+    transition: left 0.5s ease-in-out;
+}
+
+.slider.slider-open {
+    left: 0;
+}
+
+.slider.slider-close {
+    left: -300px;
+}

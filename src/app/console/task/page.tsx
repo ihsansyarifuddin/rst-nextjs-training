@@ -1,9 +1,9 @@
 export const metadata = {
-    title: "Tasker - Console"
+    title: "Tasker - Task"
 };
 
 export default function ConsoleIndex() {
     return (
-        <p>Console Index</p>
+        <p>Task Index</p>
     )
 }

@@ -20,11 +20,11 @@ export function getAuthUser(jwt: string): User {
 }
 
 export function middleware(request: NextRequest) {
-    if (!request.cookies.has('auth._token.local')) {
+    if (!request.cookies.has('_token')) {
         return NextResponse.redirect(new URL('/login', request.url))
     }
 
-    const jwt = request.cookies.get('auth._token.local')?.value
+    const jwt = request.cookies.get('_token')?.value
 
     if (isTokenExpired(jwt)) {
         return NextResponse.redirect(new URL('/login', request.url))

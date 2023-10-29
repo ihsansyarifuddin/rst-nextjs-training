@@ -5,7 +5,7 @@ import {isTokenExpired} from "@/middleware";
 import {redirect} from "next/navigation";
 
 export async function getAll() {
-    const jwt = cookies().get('auth._token.local')?.value
+    const jwt = cookies().get('_token')?.value
     if (isTokenExpired(jwt)) {
         redirect('/login')
     }

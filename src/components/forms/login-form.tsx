@@ -16,7 +16,7 @@ export function LoginForm() {
     const [state, action] = useFormState(login, initialState)
 
     if (state?.token !== null) {
-        setCookie('auth._token.local', state.token)
+        setCookie('_token', state.token)
         redirect('/console')
     }
 
