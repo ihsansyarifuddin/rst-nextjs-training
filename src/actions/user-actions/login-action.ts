@@ -13,12 +13,13 @@ export async function login(prevState: any, formData: FormData) {
         password: formData.get('password')
     })
 
-    const res = await fetch('https://tasker.my.id/api/v1/user/login', {
+    return await fetch('https://tasker.my.id/api/v1/user/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(parsed)
+        body: JSON.stringify(parsed),
+        cache: 'no-store'
     }).then(async data => {
         const json = await data.json()
         if (data.status === 200) {
@@ -39,6 +40,4 @@ export async function login(prevState: any, formData: FormData) {
             token: null
         }
     })
-
-    return res
 }
