@@ -27,7 +27,7 @@ export async function createTask(prevState: any, formData: FormData) {
         project_id: Number(formData.get('project'))
     })
 
-    return await fetch(`${process.env.TASKER_API_HOST}/task`, {
+    return await fetch(`${process.env.TASKER_API_HOST}/api/v1/task`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

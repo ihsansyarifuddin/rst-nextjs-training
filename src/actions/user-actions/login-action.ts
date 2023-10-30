@@ -13,7 +13,7 @@ export async function login(prevState: any, formData: FormData) {
         password: formData.get('password')
     })
 
-    return await fetch(`${process.env.TASKER_API_HOST}/user/login`, {
+    return await fetch(`${process.env.TASKER_API_HOST}/api/v1/user/login`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
