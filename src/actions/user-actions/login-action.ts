@@ -16,9 +16,7 @@ export async function login(prevState: any, formData: FormData) {
     return await fetch(`${process.env.TASKER_API_HOST}/api/v1/user/login`, {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Credentials': 'true',
-            'Access-Control-Allow-Origin': '*'
+            'Content-Type': 'application/json'
         },
         body: JSON.stringify(parsed),
         cache: 'no-store'
