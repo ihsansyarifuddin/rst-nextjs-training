@@ -10,7 +10,7 @@ export async function getAll() {
         redirect('/login')
     }
 
-    return await fetch('https://tasker.my.id/api/v1/project', {
+    return await fetch(`${process.env.TASKER_API_HOST}/project`, {
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${jwt}`

@@ -16,7 +16,7 @@ export async function register(prevState: any, formData: FormData) {
         password: formData.get('password')
     })
 
-    const res = await fetch('https://tasker.my.id/api/v1/user/register', {
+    const res = await fetch(`${process.env.TASKER_API_HOST}/user/register`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

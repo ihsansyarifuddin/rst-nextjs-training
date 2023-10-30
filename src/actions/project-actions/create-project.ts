@@ -28,7 +28,7 @@ export async function createProject(prevState: any, formData: FormData) {
         'Authorization': `Bearer ${jwt}`
     }
 
-    const resProject = await fetch('https://tasker.my.id/api/v1/project', {
+    const resProject = await fetch(`${process.env.TASKER_API_HOST}/project`, {
         method: 'POST',
         headers: headers,
         body: JSON.stringify({
@@ -56,7 +56,7 @@ export async function createProject(prevState: any, formData: FormData) {
     let statuses = parsed.status.split(',')
     statuses.push('Done')
 
-    return await fetch('https://tasker.my.id/api/v1/status', {
+    return await fetch(`${process.env.TASKER_API_HOST}/status`, {
         method: 'POST',
         headers: headers,
         body: JSON.stringify({
