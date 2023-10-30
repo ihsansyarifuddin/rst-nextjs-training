@@ -4,8 +4,8 @@
 
 :root {
   --foreground-rgb: #e1e1e1;
-  --background-start-rgb: #13022c;
-  --background-end-rgb: #0f031f;
+  --background-start-rgb: #0b011a;
+  --background-end-rgb: #06010c;
 }
 
 body {
@@ -44,4 +44,17 @@ body {
 
 .slider.slider-open .slider-content {
     left: 0;
+}
+
+table th,
+table td {
+    padding: 0.75rem 0.75rem;
+}
+
+table tbody tr:not(:last-child) {
+    border-bottom: 1px #5d5d5d solid;
+}
+
+::-webkit-scrollbar {
+    width: 0;
 }
