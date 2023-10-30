@@ -21,3 +21,6 @@ jobs:
         port: ${{ secrets.PORT }}
         script: |
           cd /var/www/ui.tasker.my.id
+          sudo chown -R bagilink /var/www/ui.tasker.my.id
+          git config --global --add safe.directory /var/www/ui.tasker.my.id
+          git pull origin main
