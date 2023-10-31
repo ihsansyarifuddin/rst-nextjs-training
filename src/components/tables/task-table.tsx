@@ -9,10 +9,10 @@ type Props = {
     project_id: number|null|undefined
 }
 
-export function TaskTable(props: Props) {
+export function TaskTable() {
     const [data, setData] = useState([] as TaskFilter[])
 
-    filterByProject(props.project_id).then(data => {
+    filterByProject(null).then(data => {
         setData(data.data)
     }).catch(err => {
         console.log(err.message)
