@@ -21,7 +21,7 @@ export default function ConsoleIndex() {
                         <th></th>
                     </tr>
                     </thead>
-                    <TaskTable/>
+                    <TaskTable project_id={null}/>
                 </table>
             </div>
         </div>
