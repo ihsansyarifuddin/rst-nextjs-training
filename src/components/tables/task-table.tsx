@@ -1,6 +1,6 @@
 'use client'
 
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {filterByProject} from "@/actions/task-actions/filter-task";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faTrash} from "@fortawesome/free-solid-svg-icons";
@@ -12,11 +12,13 @@ type Props = {
 export function TaskTable() {
     const [data, setData] = useState([] as TaskFilter[])
 
-    filterByProject(null).then(data => {
-        setData(data.data)
-    }).catch(err => {
-        console.log(err.message)
-    })
+    useEffect(() => {
+        filterByProject(null).then(data => {
+            setData(data.data)
+        }).catch(err => {
+            console.log(err.message)
+        })
+    }, []);
 
     return (
         <tbody>
