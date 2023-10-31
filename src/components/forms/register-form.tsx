@@ -14,17 +14,17 @@ export function RegisterForm() {
 
     return (
         <form action={ action }>
-            <div className='mt-5 w-[400px]'>
+            <div className='mt-5 min-w-[400px]'>
                 <label htmlFor="name-input" className='block text-sm font-medium leading-6 text-start'>Name</label>
                 <input name='name' id='name-input' type="text" className='bg-fuchsia-950 border-gray-600 mt-1 px-3 py-2 border-2 shadow-sm b placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md focus:ring-1'/>
             </div>
 
-            <div className='mt-5 w-[400px]'>
+            <div className='mt-5 min-w-[400px]'>
                 <label htmlFor="email-input" className='block text-sm font-medium leading-6 text-start'>Email</label>
                 <input name='email' id='email-input' type="text" className='bg-fuchsia-950 border-gray-600 mt-1 px-3 py-2 border-2 shadow-sm b placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md focus:ring-1'/>
             </div>
 
-            <div className='mt-5 w-[400px]'>
+            <div className='mt-5 min-w-[400px]'>
                 <label htmlFor="password-input" className='block text-sm font-medium leading-6 text-start'>Password</label>
                 <input name='password' id='password-input' type="password" className='bg-fuchsia-950 border-gray-600 mt-1 px-3 py-2 border-2 shadow-sm b placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md focus:ring-1'/>
             </div>
